@@ -1,0 +1,4 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0);pwd)
+$SCRIPT_DIR/go-docker run --privileged --name auth-proxy -p 441:441 -d auth-proxy:1.0 /sbin/init

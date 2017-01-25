@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#BASE_DIR=/Volumes/MacStore/Docker
+BASE_DIR=~/Docker
+
+this_machine=$( echo `hostname` | sed -e 's/\..*//g' )
+current_link=$(readlink $BASE_DIR/machines)
+if [ -z `echo "$current_link" | grep "$this_machine"` ]; then
+  rm $BASE_DIR/machines
+  ln -s $BASE_DIR/$this_machine-machines $BASE_DIR/machines
+fi
+
+docker-machine --storage-path $BASE_DIR/machines $@ shibboleth

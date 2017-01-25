@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./go-docker run --privileged --name shib-idp -d -p 4443:4443 jfroche/docker-shibboleth-idp:latest /sbin/init
+

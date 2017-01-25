@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0);pwd)
+$SCRIPT_DIR/go-docker run --privileged --name web -p 8080:80 -d web:1.0 sbin/init
+

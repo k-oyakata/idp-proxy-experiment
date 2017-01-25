@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(cd $(dirname $0);pwd)
+$SCRIPT_DIR/go-docker run --privileged --name saml-idp -p 443:443 -d saml-idp:1.0 /sbin/init
+
