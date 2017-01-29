@@ -26,8 +26,6 @@ RUN set -x \
 # Copy the nginx configuration files
 COPY resources/nginx/nginx.conf /etc/nginx/
 COPY resources/nginx/idp-proxy.conf /etc/nginx/conf.d/
-RUN set -x \
-    && mkdir -p /var/log/nginx
 # Setup the keys
 RUN set -x \
     && cd /tmp \
