@@ -10,13 +10,12 @@ $config = array(
         'core:AdminPassword',
     ),
 
-
     // An authentication source which can authenticate against both SAML 2.0
     // and Shibboleth 1.3 IdPs.
     'default-sp' => array(
         'saml:SP',
-        'privatekey' => 'sp.key',
-        'certificate' => 'sp.crt',
+        'privatekey' => 'idp-proxy.key',
+        'certificate' => 'idp-proxy.cer',
 
         // The entity ID of this SP.
         // Can be NULL/unset, in which case an entity ID is generated based on the metadata URL.
