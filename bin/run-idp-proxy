@@ -1,5 +1,5 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
-$SCRIPT_DIR/go-docker run --privileged --name idp-proxy -p 443:443 -d idp-proxy:1.0 /sbin/init
+$SCRIPT_DIR/docker run -v /var/log --privileged --name idp-proxy -p 443:443 -d idp-proxy:latest /sbin/init
 

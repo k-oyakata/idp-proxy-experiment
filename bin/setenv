@@ -1,2 +1,7 @@
+SUDO=sudo
+which docker-machine 1>/dev/null 2>/dev/null
+[ "$?" -eq 0 ] && {
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
 eval "$($SCRIPT_DIR/docker-machine-shibboleth env)"
+SUDO=""
+}
