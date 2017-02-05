@@ -11,3 +11,4 @@ if [ -z `echo "$current_link" | grep "$this_machine"` ]; then
 fi
 
 docker-machine --storage-path $BASE_DIR/machines $@ shibboleth
+#docker-machine --storage-path $BASE_DIR/machines $@ test

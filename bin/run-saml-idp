@@ -1,5 +1,5 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
-$SCRIPT_DIR/docker run -v /var/log --privileged --name saml-idp -p 443:443 -d saml-idp:1.0 /sbin/init
+$SCRIPT_DIR/docker run -v /var/log --privileged --name saml-idp -p 443:443 -d saml-idp:latest /sbin/init
 
