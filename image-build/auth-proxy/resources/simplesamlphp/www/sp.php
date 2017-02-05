@@ -1,6 +1,12 @@
 <?php
 require_once('_include.php');
 
+#
+
+
+
+
+
 $as = new SimpleSAML_Auth_Simple('default-sp');
 if ($as->isAuthenticated()) {
 //header('Location: http://web.demo.org:8080');
