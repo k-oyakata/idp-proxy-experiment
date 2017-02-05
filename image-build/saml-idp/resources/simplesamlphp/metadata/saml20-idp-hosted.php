@@ -13,8 +13,8 @@ $metadata['__DYNAMIC:1__'] = array(
 	'host' => '__DEFAULT__',
 
 	// X.509 key and certificate. Relative to the cert directory.
-	'privatekey' => 'idp.key',
-	'certificate' => 'idp.crt',
+	'privatekey' => 'saml-idp.key',
+	'certificate' => 'saml-idp.cer',
 
 	/*
 	 * Authentication source to use. Must be one that is configured in
