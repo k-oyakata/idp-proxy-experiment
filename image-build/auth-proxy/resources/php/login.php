@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 認証が成功したとき
         // セッションIDの追跡を防ぐ
         session_regenerate_id(true);
-        // ユーザ名をセット
+        // Set Session info
         $_SESSION['username'] = $username;
-        // ログイン完了後に / に遷移
-        header('Location: ' . $GOTO);
+        // Go to JupyterHub
+        echo get_contents(HUB_URL);
         exit;
     }
     // 「403 Forbidden」
@@ -45,7 +45,7 @@ echo $path_info.'<br>';
 <form method="post" action="">
     ユーザ名: <input type="text" name="username" value=""></br>
     パスワード: <input type="password" name="password" value=""></br>
-    <input type="hidden" name="token" value="<?=h(generate_token())?>">
+    <input type="hidden" name="token" value="<?=h(gen_token())?>">
     <input type="submit" value="ログイン">
 </form>
 <?php if (http_response_code() === 403): ?> 

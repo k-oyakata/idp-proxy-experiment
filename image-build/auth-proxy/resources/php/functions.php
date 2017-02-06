@@ -1,7 +1,8 @@
 <?php
 require_once('../simplesamlphp/www/_include.php');
 
-$GOTO = 'https://auth-proxy:441/go';
+define("HUB_URL", "http://web.demo.org:8080");
+
 
 function is_authenticated_local_user()
 {
@@ -15,26 +16,41 @@ function is_authenticated_fede_user()
     return isset($_SESSION['username']);
 }
 
-function redirect_by_local_user_session()
+
+function request_by_local_user_session()
 {
     @session_start();
     if (isset($_SESSION['username'])) {
-        header('Location: ' . $GOTO);
-        header('Location: ' . 'https://auth-proxy:441/go');        
+        echo get_contents(HUB_URL);
         exit;
     }
 }
 
-function redirect_by_fed_user_session()
+function request_by_fed_user_session()
 {
     $as = new SimpleSAML_Auth_Simple('default-sp');
     if ($as->isAuthenticated()) {
-        header('Location: ' . $GOTO);
+        echo get_contents(HUB_URL);
         exit;
     }
 }
 
+/**
+ * Get contents from the specified URL.
+ */
+function get_contents($url)
+{
+    $context = stream_context_create(array(
+        'http' => array('ignore_errors' => true)
+    ));
+    $result = file_get_contents($url, false, $context);
 
+    return $result;
+}
+
+/**
+ * Logout from the federation
+ */
 function logout_fed()
 {
     $as = new SimpleSAML_Auth_Simple('default-sp');
@@ -44,33 +60,31 @@ function logout_fed()
 }
 
 /**
- * CSRFトークンの生成
+ * Generate CSRF token based on th session id.
  *
- * @return string トークン
+ * @return string  generated token
  */
 function generate_token()
 {
-    // セッションIDからハッシュを生成
     return hash('sha256', session_id());
 }
 
 /**
- * CSRFトークンの検証
+ * Validate CSRF token
  *
- * @param string $token
- * @return bool 検証結果
+ * @param string $token  CSRF token
+ * @return bool  result of validation
  */
 function validate_token($token)
 {
-    // 送信されてきた$tokenがこちらで生成したハッシュと一致するか検証
     return $token === generate_token();
 }
 
 /**
- * htmlspecialcharsのラッパー関数
+ * Wraper function of the 'htmlspecialchars'
  *
- * @param string $str
- * @return string
+ * @param string $str  source string
+ * @return string  entity string
  */
 function h($str)
 {
