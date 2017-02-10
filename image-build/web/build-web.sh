@@ -1,8 +1,10 @@
 #!/bin/bash
 
+OPT=$1
+
 BASE_DIR=$(cd $(dirname $0);cd ../../;pwd)
 
-#$BASE_DIR/bin/go-docker build --no-cache=true -t web:1.0 ./
+#mkdir -p $BASE_DIR/image-build/web/resources/tmp
+#(cd $BASE_DIR/image-build/web/resources/tmp; curl -O #http://rpms.famillecollet.com/enterprise/remi-release-7.rpm)
 
-$BASE_DIR/bin/go-docker build -t web:1.0 ./
-
+$BASE_DIR/bin/docker build $OPT -t websocket:latest ./

@@ -1,5 +1,6 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
-$SCRIPT_DIR/docker run --privileged --name web -p 8080:80 -d web:1.0 sbin/init
+#$SCRIPT_DIR/docker run --privileged --name web -p 8080:80 -d web:1.0 sbin/init
+$SCRIPT_DIR/docker run --privileged --name web -p 3000:3000 -d websocket:latest sbin/init
 
