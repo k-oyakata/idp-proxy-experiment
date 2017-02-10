@@ -45,7 +45,7 @@ echo $path_info.'<br>';
 <form method="post" action="">
     ユーザ名: <input type="text" name="username" value=""></br>
     パスワード: <input type="password" name="password" value=""></br>
-    <input type="hidden" name="token" value="<?=h(gen_token())?>">
+    <input type="hidden" name="token" value="<?=h(generate_token())?>">
     <input type="submit" value="ログイン">
 </form>
 <?php if (http_response_code() === 403): ?> 

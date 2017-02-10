@@ -1,6 +1,7 @@
 FROM docker.io/centos:7
 
 # Install packages
+COPY resources/tmp/remi-release-7.rpm /tmp/
 RUN set -x \
     && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 \
     && yum -y update \
@@ -11,7 +12,9 @@ RUN set -x \
     # Install nginx and php
     && yum -y install --enablerepo=epel nginx \
     && systemctl enable nginx \
-    && yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm \
+    && rpm -Uvh /tmp/remi-release-7.rpm \ 
+    && rm /tmp/remi-release-7.rpm \
+    #&& yum -y install http://rpms.famillecollet.com/enterprise/remi-release-7.rpm \
     && rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi \
     && yum -y install --enablerepo=remi-php56 php php-fpm php-xml php-pdo \ 
     && systemctl enable php-fpm \
