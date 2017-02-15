@@ -1,4 +1,4 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
-$SCRIPT_DIR/docker run -v /var/log -v ~/k-oyakata/Project/nii/idp-proxy-experiment/image-build/auth-proxy/resources/php:/var/www/php --privileged --name auth-proxy -p 441:441 -d auth-proxy:latest /sbin/init
+$SCRIPT_DIR/docker run -v /var/log -v ~/k-oyakata/Project/nii/idp-proxy-experiment/image-build/auth-proxy-ubuntu/resources/php:/var/www/php --privileged --name auth-proxy -p 443:443 -d auth-proxy-ubuntu:latest /sbin/init

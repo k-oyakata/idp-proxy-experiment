@@ -1,4 +1,5 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(cd $(dirname $0);pwd)
-$SCRIPT_DIR/docker run -v /var/log --privileged --name auth-proxy -p 441:441 -d auth-proxy:latest /sbin/init
+#$SCRIPT_DIR/docker run -v /var/log --privileged --name auth-proxy -p 441:441 -d auth-proxy:latest /sbin/init
+$SCRIPT_DIR/docker run -v /var/log --privileged --name auth-proxy -p 441:441 -d andreisusanu/nginx-php5.6:latest /sbin/init
