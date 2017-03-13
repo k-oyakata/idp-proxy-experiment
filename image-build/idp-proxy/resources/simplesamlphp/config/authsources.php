@@ -19,15 +19,15 @@ $config = array(
 
         // The entity ID of this SP.
         // Can be NULL/unset, in which case an entity ID is generated based on the metadata URL.
-        'entityID' => 'https://nbhub.ecloud.nii.ac.jp/simplesaml/module.php',
+        'entityID' => 'https://nbhub.ecloud.nii.ac.jp/shibboleth-sp',
 
         // The entity ID of the IdP this should SP should contact.
         // Can be NULL/unset, in which case the user will be shown a list of available IdPs.
-        'idp' => 'https://shib-idp.other.org:4443/simplesaml/shib13/idp/metadata.php',
+        'idp' => null,
 
         // The URL to the discovery service.
         // Can be NULL/unset, in which case a builtin discovery service will be used.
-        'discoURL' => null,
+        'discoURL' => 'https://test-ds.gakunin.nii.ac.jp/WAYF',
 
         /*
          * WARNING: SHA-1 is disallowed starting January the 1st, 2014.
@@ -46,7 +46,7 @@ $config = array(
          * options in the IdP-remote metadata set and uncomment the following option.
          *
          * Please refer to the hosted SP configuration reference for more information.
-          */
+         */
         //'signature.algorithm' => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
 
         /*

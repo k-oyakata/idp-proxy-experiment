@@ -669,6 +669,7 @@ $config = array(
      */
     'metadata.sources' => array(
         array('type' => 'flatfile'),
+        array('type' => 'xml', 'file' => 'metadata/gakunin-test-metadata.xml'),
     ),
 
 
