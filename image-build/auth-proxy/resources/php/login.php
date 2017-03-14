@@ -1,10 +1,19 @@
 <?php
+require_once __DIR__ . '/const.php';
+require_once __DIR__ . '/hub-const.php';
 require_once __DIR__ . '/functions.php';
+
+
+$lifetime = 0;
+$path = "/";
+session_set_cookie_params($lifetime, $path);
 @session_start();
 
 // 事前に生成したユーザごとのパスワードハッシュの配列
 $hashes = [
-    'user' => '$2y$10$iKem16FEuNIhd1Buhz8Oz.shL.AZHw9IKwvZT9GuTWz7s8P4GgJCK',
+    'oyakata' => '$2y$10$iKem16FEuNIhd1Buhz8Oz.shL.AZHw9IKwvZT9GuTWz7s8P4GgJCK',
+    'oyakata2' => '$2y$10$iKem16FEuNIhd1Buhz8Oz.shL.AZHw9IKwvZT9GuTWz7s8P4GgJCK',
+    'oyakata3' => '$2y$10$iKem16FEuNIhd1Buhz8Oz.shL.AZHw9IKwvZT9GuTWz7s8P4GgJCK',
 ]; 
 
 // ユーザから受け取ったユーザ名とパスワード
@@ -19,16 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password,
             isset($hashes[$username])
                 ? $hashes[$username]
-                : '$2y$10$abcdefghijklmnopqrstuv' // ユーザ名が存在しないときだけ極端に速くなるのを防ぐ
+                : '$2y$10$abcdefghijklmnopqrstuv' // dummy hash string for when user doesn't exist
         )
     ) {
-        // 認証が成功したとき
-        // セッションIDの追跡を防ぐ
         session_regenerate_id(true);
         // Set Session info
         $_SESSION['username'] = $username;
-        // Go to JupyterHub
-        echo get_contents(HUB_URL);
+
+        header("X-Accel-Redirect: /entrance/");
+        header("X-Reproxy-URL: ".HUB_URL.'/'.COURSE_NAME."/hub/login");
+        header("X-REMOTE-USER: $username");
+
         exit;
     }
     // 「403 Forbidden」
@@ -36,13 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 header('Content-Type: text/html; charset=UTF-8');
-$path_info = isset($_SERVER[PATH_INFO]) ? $_SERVER[PATH_INFO] : "none";
-echo $path_info.'<br>';
 ?>
+
 <!DOCTYPE html>
 <title>ログインページ</title>
 <h1>ログインしてください</h1>
-<form method="post" action="">
+<form method="post" action="/php/login.php">
     ユーザ名: <input type="text" name="username" value=""></br>
     パスワード: <input type="password" name="password" value=""></br>
     <input type="hidden" name="token" value="<?=h(generate_token())?>">
